@@ -102,8 +102,8 @@ let mouseX = 0,
   mouseY = 0;
 let prevMouseX = 0,
   prevMouseY = 0;
-
 let lastMoveTime = 0;
+
 document.addEventListener("mousemove", (e) => {
   const rect = gradientCanvas.getBoundingClientRect();
   prevMouseX = mouseX;
