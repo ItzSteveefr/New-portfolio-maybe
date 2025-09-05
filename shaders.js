@@ -89,7 +89,7 @@ void main() {
       float brushSizeFactor = 1e-4 / uBrushSize;
       float strengthFactor = 0.03 * uBrushStrength;
 
-      float falloff = exp(-brushSizeFactor*q*q);
+      float falloff = exp(-brushSizeFactor*q*q*q);
       falloff = pow(falloff, 0.5);
 
       me.xyw += strengthFactor * falloff * vec3(m, 10.);
