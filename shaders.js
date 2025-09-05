@@ -45,7 +45,7 @@ void main() {
   if (iFrame < 1) {
     float w = 0.5+sin(0.2*U.x)*0.5;
     float q = length(U-0.5*ur);
-    gl_FragColor = vec4(0.1*exp(-0.001*q*q),0.0,0.0,w);
+    gl_FragColor = vec4(0.1*exp(-0.001*q*q),0,0,w);
   } else {
     vec2 v = U;
     vec2 A = v + vec2(1, 1);
@@ -67,7 +67,7 @@ void main() {
          s = t(v, 0, -1),
          w = t(v, -1, 0);
     vec4 ne = .25*(n+e+s+w);
-    me = mix(t(v), ne, vec4(0.15,0.15,0.15,0.));
+    me = mix(t(v), ne, vec4(0.15,0.15,0.95,0.));
     me.z = me.z - 0.01*((area(A,B,C)+area(B,C,D))-4.);
 
     vec4 pr = vec4(e.z,w.z,n.z,s.z);
