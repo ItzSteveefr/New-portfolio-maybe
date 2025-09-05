@@ -8,10 +8,10 @@ const config = {
   fluidDecay: 0.98,
   trailLength: 0.8,
   stopDecay: 0.85,
-  color1: "#ffffff", // pure white
-  color2: "#cccccc", // light gray
-  color3: "#aaaaaa", // medium gray
-  color4: "#888888", // darker gray
+  color1: "#b8fff7", // pure white
+  color2: "#6e3466", // light gray
+  color3: "#0133ff", // medium gray
+  color4: "#66d1fe", // darker gray
   colorIntensity: 1.0,
   softness: 1.0,
 };
