@@ -1,6 +1,26 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.178.0/build/three.module.js";
+import * as THREE from "three";
 import { vertexShader, fluidShader, displayShader } from "./shaders.js";
-
+// blue
+// const colors = {
+//   color1: "#b8fff7",
+//   color2: "#6e3466",
+//   color3: "#0133ff",
+//   color4: "#66d1fe",
+// };
+// purple
+// const colors = {
+//   color1: "#d1e8ff", // Frosted chrome
+//   color2: "#88a0c2", // Brushed steel blue
+//   color3: "#4f4c7a", // Metallic violet
+//   color4: "#120336ff", // Iridescent lavender
+// };
+// black
+const colors = {
+  color1: "#1a1a1a", // Deep black core
+  color2: "#323232", // Gunmetal shade
+  color3: "#5c5c75", // Titanium violet
+  color4: "#8c8cbf", // Steel lavender glow
+};
 const config = {
   brushSize: 25.0,
   brushStrength: 0.5,
@@ -8,10 +28,7 @@ const config = {
   fluidDecay: 0.98,
   trailLength: 0.8,
   stopDecay: 0.85,
-  color1: "#00f0ff", // cyan
-  color2: "#0066ff", // deep blue
-  color3: "#aaff00", // lime green
-  color4: "#00ffcc", // aqua green
+  colors: colors,
   colorIntensity: 1.0,
   softness: 1.0,
 };
@@ -20,7 +37,6 @@ function hexToRgb(hex) {
   const r = parseInt(hex.slice(1, 3), 16) / 255;
   const g = parseInt(hex.slice(3, 5), 16) / 255;
   const b = parseInt(hex.slice(5, 7), 16) / 255;
-
   return [r, g, b];
 }
 
@@ -84,10 +100,10 @@ const displayMaterial = new THREE.ShaderMaterial({
     },
     iFluid: { value: null },
     uDistortionAmount: { value: config.distortionAmount },
-    uColor1: { value: new THREE.Vector3(...hexToRgb(config.color1)) },
-    uColor2: { value: new THREE.Vector3(...hexToRgb(config.color2)) },
-    uColor3: { value: new THREE.Vector3(...hexToRgb(config.color3)) },
-    uColor4: { value: new THREE.Vector3(...hexToRgb(config.color4)) },
+    uColor1: { value: new THREE.Vector3(...hexToRgb(config.colors.color1)) },
+    uColor2: { value: new THREE.Vector3(...hexToRgb(config.colors.color2)) },
+    uColor3: { value: new THREE.Vector3(...hexToRgb(config.colors.color3)) },
+    uColor4: { value: new THREE.Vector3(...hexToRgb(config.colors.color4)) },
     uColorIntensity: { value: config.colorIntensity },
     uSoftness: { value: config.softness },
   },
@@ -112,7 +128,6 @@ document.addEventListener("mousemove", (e) => {
   mouseX = e.clientX - rect.left;
   mouseY = rect.height - (e.clientY - rect.top);
   lastMoveTime = performance.now();
-
   fluidMaterial.uniforms.iMouse.value.set(
     mouseX,
     mouseY,
@@ -146,13 +161,12 @@ function animate() {
   displayMaterial.uniforms.uDistortionAmount.value = config.distortionAmount;
   displayMaterial.uniforms.uColorIntensity.value = config.colorIntensity;
   displayMaterial.uniforms.uSoftness.value = config.softness;
-  displayMaterial.uniforms.uColor1.value.set(...hexToRgb(config.color1));
-  displayMaterial.uniforms.uColor2.value.set(...hexToRgb(config.color2));
-  displayMaterial.uniforms.uColor3.value.set(...hexToRgb(config.color3));
-  displayMaterial.uniforms.uColor4.value.set(...hexToRgb(config.color4));
+  displayMaterial.uniforms.uColor1.value.set(...hexToRgb(config.colors.color1));
+  displayMaterial.uniforms.uColor2.value.set(...hexToRgb(config.colors.color2));
+  displayMaterial.uniforms.uColor3.value.set(...hexToRgb(config.colors.color3));
+  displayMaterial.uniforms.uColor4.value.set(...hexToRgb(config.colors.color4));
 
   fluidMaterial.uniforms.iPreviousFrame.value = previousFluidTarget.texture;
-
   renderer.setRenderTarget(currentFluidTarget);
   renderer.render(fluidPlane, camera);
 
