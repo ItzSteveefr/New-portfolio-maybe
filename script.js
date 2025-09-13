@@ -16,10 +16,10 @@ import { vertexShader, fluidShader, displayShader } from "./shaders.js";
 // };
 // black
 const colors = {
-  color1: "#1a1a1a", // Deep black core
-  color2: "#323232", // Gunmetal shade
-  color3: "#5c5c75", // Titanium violet
-  color4: "#8c8cbf", // Steel lavender glow
+color1: "#000000", // pure black
+color2: "#111111", // very dark gray
+color3: "#222222", // dark gray
+color4: "#333333", // medium-dark gray
 };
 const config = {
   brushSize: 25.0,
